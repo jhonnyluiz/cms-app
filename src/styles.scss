@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+:root {
+  --width-header-menu: 75px;
+}
+
+body {
+  overflow: hidden;
+}
+
+.header-menu .p-menubar {
+  height: var(--width-header-menu);
+}
+
+.body-template {
+  height: calc(100vh - var(--width-header-menu));
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.container-login .p-inputtext {
+  min-width: 20em !important;
+}
+
+.container-login .p-button {
+  min-width: 20em !important;
+}
