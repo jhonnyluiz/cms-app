@@ -1,0 +1,11 @@
+<div class="grid" *ngIf="showPaginator">
+  <div class="col-12">
+    <p-paginator
+      [rows]="paginator.size"
+      [first]="paginator.first"
+      [totalRecords]="paginator.totalElements"
+      (onPageChange)="changePaginator($event)"
+      [showFirstLastIcon]="false"
+    ></p-paginator>
+  </div>
+</div>

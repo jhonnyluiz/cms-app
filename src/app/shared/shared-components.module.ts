@@ -1,5 +1,6 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -8,6 +9,10 @@ import { AuthGuard } from './guard/auth.guard';
 import { SistemaService } from './services/sistemas.service';
 import { BlankCenterComponent } from './template/blank-center/blank-center.component';
 import { SidenavMenuComponent } from './template/sidenav-menu/sidenav-menu.component';
+import { CommonListComponent } from './template/common-list/common-list.component';
+import { AuthInterceptor } from '../modules/auth/interceptor/auth.interceptor';
+import { TdTypeSituacaoComponent } from './components/td-type-situacao/td-type-situacao.component';
+import { PaginadorCustomComponent } from './components/paginador-custom/paginador-custom.component';
 
 
 
@@ -15,6 +20,10 @@ import { SidenavMenuComponent } from './template/sidenav-menu/sidenav-menu.compo
   declarations: [
     BlankCenterComponent,
     SidenavMenuComponent,
+    CommonListComponent,
+    NotFoundComponent,
+    PaginadorCustomComponent,
+    TdTypeSituacaoComponent,
   ],
   imports: [
     FormsModule,
@@ -26,17 +35,21 @@ import { SidenavMenuComponent } from './template/sidenav-menu/sidenav-menu.compo
   ],
   exports: [
     BlankCenterComponent,
+    CommonListComponent,
     SidenavMenuComponent,
+    NotFoundComponent,
 
     FormsModule,
     HttpClientModule,
     NgPrimeComponentsModule,
+    PaginadorCustomComponent,
     ReactiveFormsModule,
     RouterModule,
   ],
   providers: [
     SistemaService,
     AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ]
 })
 export class SharedComponentsModule { }

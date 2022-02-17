@@ -1,3 +1,4 @@
+import { AuthStorageService } from './../../../modules/auth/services/auth-storage.service';
 import { MenuItem } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -13,11 +14,13 @@ export class SidenavMenuComponent implements OnInit {
 
   sub: Subscription[] = [];
   sistema: Sistema;
-  constructor(private activatedRoute: ActivatedRoute) {}
+  user: any;
+  constructor(private activatedRoute: ActivatedRoute, public authService: AuthStorageService) {}
 
 
   ngOnInit() {
     this.sistema = this.activatedRoute.snapshot.data['sistema'];
+    console.log(this.authService.getPayload())
   }
 
 }

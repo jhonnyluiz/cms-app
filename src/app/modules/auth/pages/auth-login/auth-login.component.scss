@@ -3,9 +3,11 @@
 .container-login {
   height: 100vh;
   overflow: hidden;
+  min-width: 350px;
 }
 .box {
-  width: 30em;
+  width: 100%;
+  max-width: 30em;
   min-height: 35em;
   border-radius: 2em;
   color: #fff;

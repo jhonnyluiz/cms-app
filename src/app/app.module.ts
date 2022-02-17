@@ -1,5 +1,3 @@
-import { AuthStorageService } from './modules/auth/services/auth-storage.service';
-import { AuthGuard } from './shared/guard/auth.guard';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -9,6 +7,8 @@ import { MessageService } from 'primeng/api';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './modules/auth/interceptor/auth.interceptor';
+import { AuthStorageService } from './modules/auth/services/auth-storage.service';
+import { AuthGuard } from './shared/guard/auth.guard';
 import { GlobalErrorHandlerService } from './shared/handler/global-error-handles.service';
 import { SharedComponentsModule } from './shared/shared-components.module';
 
@@ -27,9 +27,9 @@ import { SharedComponentsModule } from './shared/shared-components.module';
     AuthGuard,
     AuthStorageService,
     MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

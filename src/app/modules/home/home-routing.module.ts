@@ -1,3 +1,4 @@
+import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 import { HomeDashboardComponent } from './pages/home-dashboard/home-dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

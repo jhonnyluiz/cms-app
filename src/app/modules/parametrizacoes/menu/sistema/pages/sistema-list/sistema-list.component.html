@@ -1,0 +1,40 @@
+<common-list #commonList [config]="sistemaListConfig">
+  <div body>
+    <div class="table-list" *ngIf="datasource; else noDatasource">
+      <p-table [value]="datasource.content" dataKey="id" responsiveLayout="scroll" styleClass="p-datatable-striped"
+      [(selection)]="listSelected" [rowSelectable]="isRowSelectable" selectionMode="multiple"
+      (onRowSelect)="enableExcluir($event)" (onRowUnselect)="enableExcluir($event)" (onHeaderCheckboxToggle)="enableExcluir($event)"
+          currentPageReportTemplate="" [rowsPerPageOptions]="[10,25,50]">
+          <ng-template pTemplate="header">
+              <tr>
+                <th class="w-5 text-center"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                <th class="w-10">Código</th>
+                <th class="w-75">Nome</th>
+                <th class="w-10 text-center">Situação</th>
+                <th class="w-10 text-center">Ações</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity>
+              <tr>
+                <td class="text-center"><p-tableCheckbox [value]="entity"></p-tableCheckbox></td>
+                <td>{{entity.codigo}}</td>
+                <td>{{entity.nome}}</td>
+                <td class="text-center">{{entity.typeSituacao}}</td>
+                <td class="text-center">Editar</td>
+              </tr>
+          </ng-template>
+      </p-table>
+    </div>
+    <paginador-custom #paginador (change)="loadDatasource()" [showPaginator]="datasource"></paginador-custom>
+  </div>
+  <ng-template #noDatasource>
+    <p-table [value]="skeletonTable.data" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+          <tr><th *ngFor="let item of skeletonTable.columns" class="{{item.classStyle}}">{{item.label}}</th></tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+          <tr><td *ngFor="let item of skeletonTable.columns"><p-skeleton></p-skeleton></td></tr>
+      </ng-template>
+  </p-table>
+  </ng-template>
+</common-list>

@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthStorageService } from '../services/auth-storage.service';
-@Injectable()
+
+@Injectable({providedIn: 'root'})
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(

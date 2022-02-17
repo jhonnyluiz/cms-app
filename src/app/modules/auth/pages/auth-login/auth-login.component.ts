@@ -31,7 +31,7 @@ export class AuthLoginComponent implements OnInit, OnDestroy {
 
   login() {
     if (this._validarFormulario()) {
-      this.sub.push(this.authService.login(this.form.value).subscribe(this.logged));
+      this.sub.push(this.authService.login(this.form.value).subscribe(t => this.logged(t)));
     }
   }
 

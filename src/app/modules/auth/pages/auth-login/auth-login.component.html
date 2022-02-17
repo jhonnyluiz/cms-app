@@ -1,5 +1,5 @@
-<div class="grid container-login ">
-  <div class="grid flex col-12 bg-blue-200 align-content-center justify-content-center align-items-center">
+<div class="grid container-login bg-blue-200">
+  <div class="grid flex col-12 lg:col-4 lg:col-offset-4 md:col-6 md:col-offset-3  align-content-center justify-content-center align-items-center">
     <div class="box grid flex bg-bluegray-900 align-content-center justify-content-center align-items-center">
       <form [formGroup]="form">
         <div class="col-12 flex justify-content-center">
@@ -9,14 +9,14 @@
         <div class="col-12 flex justify-content-center mt-5">
           <div class="field">
             <label for="usuario" class="block">Usuário</label>
-            <input id="usuario" type="usuario" aria-describedby="usuario-help" pInputText required formControlName="username"/>
+            <input id="usuario" type="usuario" aria-describedby="usuario-help" pInputText required formControlName="username" (keyup.enter)="login()"/>
             <small id="usuario-help" class="p-error block" *ngIf="showMessageRequired('username')">Usuário é obrigatório.</small>
           </div>
         </div>
         <div class="col-12 flex justify-content-center">
           <div class="field">
             <label for="usuario" class="block">Senha</label>
-            <p-password [feedback]="false" styleClass="" required formControlName="password"></p-password>
+            <p-password [feedback]="false" styleClass="" required formControlName="password" (keyup.enter)="login()" class="w-100"></p-password>
             <small id="usuario-help" class="p-error block" *ngIf="showMessageRequired('password')">Senha é obrigatória.</small>
           </div>
         </div>

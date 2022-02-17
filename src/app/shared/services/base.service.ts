@@ -1,10 +1,8 @@
-import { environment } from '../../../environments/environment';
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { Page } from '../models/page.model';
 
-@Injectable()
 export abstract class BaseService<T> {
   constructor(public http: HttpClient) { }
 
@@ -18,7 +16,7 @@ export abstract class BaseService<T> {
     return this.http.get<T[]>(this.baseUrl, { headers: this.headers });
   }
 
-  public getPagedList(page: number = 1, size: number = 20): Observable<Page<T>> {
+  public getPagedList(page: number = 1, size: number = 10): Observable<Page<T>> {
     return this.http.get<Page<T>>(this.baseUrl, { headers: this.headers, params: this.getPagedListParams(page, size)});
   }
 

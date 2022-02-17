@@ -5,14 +5,14 @@
           <img src="assets/images/csm_logo.png" height="40" class="mr-2 pointer" [routerLink]="['/home']">
       </ng-template>
       <ng-template pTemplate="end">
-          <input type="text" pInputText placeholder="Pesquisar">
+        <div class="user">
+          <span>{{user?.username}}</span>
+        </div>
       </ng-template>
     </p-menubar>
   </div>
   <div class="col-12 p-0 bg-bluegray-100 body-template">
-    <div class="flex align-items-center-center justify-content-center align-content-center">
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>
 

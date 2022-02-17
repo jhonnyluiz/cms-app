@@ -1,3 +1,4 @@
+import { Page } from './../models/page.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -19,4 +20,5 @@ export class SistemaService extends BaseService<Sistema> {
   public findByCodSistema(codSistema: string): Observable<Sistema> {
     return this.httpClient.get<Sistema>(this.baseUrl + '/byCodigo/' + codSistema, {headers: this.headers});
   }
+
 }
