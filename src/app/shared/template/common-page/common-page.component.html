@@ -1,0 +1,27 @@
+<div class="content-list">
+  <div class="grid flex">
+    <div class="col-12 md:col-7 lg:col-8">
+      <span [innerHtml]="config.title" *ngIf="config" class="title-common"></span>
+      <span [innerHtml]="config.subtitle" *ngIf="config" class="subtitle-common"></span>
+    </div>
+    <div class="col-12 md:col-5 lg:col-4">
+      <div class="flex justify-content-end" *ngIf="btnActions && btnActions?.length > 0">
+        <button pButton pRipple type="button"
+          *ngFor="let btn of btnActions"
+          label="{{btn.label}}"
+          icon="{{btn.icon}}"
+          class="{{btn.classStyle}} ml-2"
+          (click)="btn.action()"
+          [disabled]="btn.disabled"></button>
+      </div>
+    </div>
+  </div>
+  <p-card>
+    <div class="grid flex body-list">
+      <div class="col-12">
+        <ng-content select="[body]"></ng-content>
+      </div>
+    </div>
+  </p-card>
+</div>
+

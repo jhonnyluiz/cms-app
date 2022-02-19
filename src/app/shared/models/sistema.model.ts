@@ -1,6 +1,7 @@
 import { MenuItem } from "primeng/api";
+import { BaseModel } from "./base.model";
 
-export class Sistema {
+export class Sistema extends BaseModel {
   constructor(
     public id: number,
     public nome: string,
@@ -9,5 +10,5 @@ export class Sistema {
     public url: string,
     public typeSituacao: string,
     public itensMenu: MenuItem[]
-  ) {}
+  ) { super(id); }
 }

@@ -1,5 +1,5 @@
 
-export class CommonListConfig {
+export class CommonPageConfig {
   constructor(
     public title: string = '',
     public subtitle: string = '',

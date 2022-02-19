@@ -34,10 +34,12 @@ export class PaginadorCustomComponent implements OnInit, OnDestroy {
   }
 
   changePaginator(event: any) {
-    this.paginator.page = event.page;
-    this.paginator.first = event.first;
-    this.setDataInformation(this.paginator);
-    this.change.emit();
+    if (this.paginator.page != event.page) {
+      this.paginator.page = event.page;
+      this.paginator.first = event.first;
+      this.setDataInformation(this.paginator);
+      this.change.emit();
+    }
   }
 
   getPage(): number {

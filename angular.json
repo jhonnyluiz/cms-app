@@ -31,11 +31,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/assets/styles/util.css",
-              "./node_modules/primeng/resources/primeng.min.css",
               "./node_modules/primeflex/primeflex.css",
               "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "src/assets/styles/util.css",
               {
                 "input": "src/saga-blue.css",
                 "bundleName": "saga-blue",
@@ -45,7 +44,8 @@
                 "input": "src/saga-green.css",
                 "bundleName": "saga-green",
                 "inject": false
-              }
+              },
+              "src/styles.scss"
             ],
             "scripts": []
           },
