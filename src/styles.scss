@@ -2,7 +2,8 @@
 
 
 :root {
-  --width-header-menu: 75px;
+  --height-header-menu: 75px;
+  --height-footer: 45px;
 }
 
 body {
@@ -10,12 +11,40 @@ body {
 }
 
 .header-menu .p-menubar {
-  height: var(--width-header-menu);
+  height: var(--height-header-menu);
   min-width: 360px;
+  border: 0;
+  border-radius: 0px;
+  background-color: var(--surface-a);
 }
 
 .body-template {
-  height: calc(100vh - var(--width-header-menu));
+  height: calc(100vh - calc(var(--height-header-menu) + var(--height-footer)));
+  background-color: var(--surface-b);
+  color: var(--text-color);
+}
+
+.p-toast {
+  z-index: 99999;
+}
+
+.footer {
+  background-color: var(--surface-a);
+  height: var(--height-footer);
+  border: 0;
+  border-radius: 0px;
+}
+
+.footer a {
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+  padding-left: 5px;
+}
+.footer a:visited {
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 .pointer {
@@ -47,6 +76,18 @@ body {
   font-weight: 700;
   font-size: 12px;
   letter-spacing: .3px;
+}
+.field > label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8em;
+}
+
+.body-list::-webkit-scrollbar {
+  width: 8px;
+}
+.body-list::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 20px;
 }
 
 .text-center { text-align: center !important; }

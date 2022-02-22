@@ -14,7 +14,7 @@ export class ColumnsTable {
 
   public static VAZIO = ColumnsTable.of(' ', 'w-5 text-center');
   public static SITUACAO = ColumnsTable.of('Situação', 'w-10 text-center');
-  public static ACOES = ColumnsTable.of('Ações', 'w-10 text-center');
+  public static EDITAR = ColumnsTable.of('Editar', 'w-5 text-center');
 
   public get isSorted(): boolean {
     return this.sort !== undefined && this.sort !== null && this.sort.trim() !== '';

@@ -1,5 +1,6 @@
-import { ActionButton } from './../../models/action-button.model';
-import { Router } from "@angular/router";
+import { CrudEnum } from '../../types/crud.enum';
+import { ActionButton } from '../../models/action-button.model';
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseModel } from "../../models/base.model";
 import { ColumnsTable } from "../../models/columns-table.model";
 import { CommonPageConfig } from "../../models/common-page-config.model";
@@ -9,20 +10,19 @@ import { CommonPageComponent } from "../../template/common-page/common-page.comp
 import { PaginadorCustomComponent } from "../paginador-custom/paginador-custom.component";
 import { BaseComponent } from "./base.component";
 import { CommonListComponent } from '../../template/common-list/common-list.component';
+import { BaseConstant } from './base.constant';
 
-export abstract class ListBaseComponent<T extends BaseModel, S extends BaseService<T>> extends BaseComponent {
+export abstract class BaseListComponent<T extends BaseModel<T>, S extends BaseService<T>> extends BaseComponent {
 
-  private _pageConfig: CommonPageConfig;
   private _datasource: Page<T>;
   private _listSelected: T[] = [];
   private _columns: ColumnsTable[] = []
   private _skeletonTable = { columns: this._columns, data: [{}] }
   private _actions: ActionButton[] = [ActionButton.btnNovo(() => this.goToNovo()), ActionButton.btnExcluir(() => this.execExcluir())];
 
-  constructor(protected router: Router, protected service: S, pageConfig: CommonPageConfig, colunsTable: ColumnsTable[]) {
-    super();
-    this._columns = colunsTable;
-    this._pageConfig = pageConfig;
+  constructor(protected router: Router, protected activatedRoute: ActivatedRoute, protected service: S, constants: BaseConstant) {
+    super(activatedRoute, constants);
+    this._columns = constants.colunsTableList;
   }
 
   /**
@@ -65,7 +65,7 @@ export abstract class ListBaseComponent<T extends BaseModel, S extends BaseServi
    */
   private _setDatasource = (res: Page<T>): void => {
     this._datasource = res;
-    this.getPaginador().setTotalElements(res.numberOfElements);
+    this.getPaginador().setTotalElements(res.totalElements);
     this.loaded();
   }
 
@@ -77,13 +77,13 @@ export abstract class ListBaseComponent<T extends BaseModel, S extends BaseServi
   /**
    * Método responsável por redirecionar para pagina de criação de um novo registro;
    */
-  public goToNovo = () => { this.router.navigate([this._pageConfig.baseUrl, 'new']); }
+  public goToNovo = () => { this.router.navigate([this.pageConfig.baseUrl, 'new']); }
 
   /**
    * Método responsável por redirecionar para pagina de edição do registro selecionado;
    * @param entity
    */
-  public goToEditar = (entity: T) => { this.router.navigate([this._pageConfig.baseUrl, entity.id, 'edit']); }
+  public goToEditar = (entity: T) => { this.router.navigate([this.pageConfig.baseUrl, entity.id, 'edit']); }
 
 
   // ####################
@@ -134,12 +134,6 @@ export abstract class ListBaseComponent<T extends BaseModel, S extends BaseServi
   // #######################
   // # METODOS GETS E SETS #
   // #######################
-
-  /**
-    * ## NÃO SOBRESCREVER ##
-    * Retorna os dados de configuração da página;
-    */
-  public get pageConfig(): CommonPageConfig { return this._pageConfig }
 
   /**
     * ## NÃO SOBRESCREVER ##

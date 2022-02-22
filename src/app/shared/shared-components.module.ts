@@ -14,6 +14,7 @@ import { BlankCenterComponent } from './template/blank-center/blank-center.compo
 import { CommonPageComponent } from './template/common-page/common-page.component';
 import { SidenavMenuComponent } from './template/sidenav-menu/sidenav-menu.component';
 import { CommonListComponent } from './template/common-list/common-list.component';
+import { ConfirmationService, TreeDragDropService } from 'primeng/api';
 
 
 
@@ -51,6 +52,8 @@ import { CommonListComponent } from './template/common-list/common-list.componen
   ],
   providers: [
     SistemaService,
+    ConfirmationService,
+    TreeDragDropService,
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ]

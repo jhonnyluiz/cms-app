@@ -1,9 +1,24 @@
-.body-list {
+.content-card {
+  box-sizing: border-box;
 }
 
+
+.body-list {
+  overflow-y: auto;
+  box-sizing: border-box;
+  max-height: calc(100vh - calc(var(--height-header-menu) + var(--height-footer) + 220px));
+}
+
+@media (max-width: 575.98px) {
+  .body-list {
+    max-height: calc(100vh - calc(var(--height-header-menu) + var(--height-footer) + 250px)) !important;
+  }
+}
+
+
 .content-list {
+  height: calc(100vh - calc(var(--height-header-menu) + var(--height-footer)));
   width: 100%;
-  height: calc(100vh);
   padding: 15px;
   font-family: 'Montserrat', sans-serif;
 }

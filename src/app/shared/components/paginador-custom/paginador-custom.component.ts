@@ -1,6 +1,7 @@
 
 import { Component, EventEmitter, Input, Output, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Pageable } from '../../models/pageable.model';
 import { Paginator } from '../../models/paginator.model';
 
 @Component({
@@ -34,9 +35,10 @@ export class PaginadorCustomComponent implements OnInit, OnDestroy {
   }
 
   changePaginator(event: any) {
-    if (this.paginator.page != event.page) {
+    if (this.paginator.page != event.page || this.paginator.size != event.rows) {
       this.paginator.page = event.page;
       this.paginator.first = event.first;
+      this.paginator.size = event.rows;
       this.setDataInformation(this.paginator);
       this.change.emit();
     }

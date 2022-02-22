@@ -20,6 +20,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     } else if (httpError.status === 500) {
       this.messageService.add({key: 'defaultError', severity:'error', summary: 'Server Error', detail: httpError.error.message});
     } else {
+      this.messageService.add({key: 'defaultError', severity:'error', summary: 'Error', detail: httpError.message});
       console.log(httpError);
     }
   }

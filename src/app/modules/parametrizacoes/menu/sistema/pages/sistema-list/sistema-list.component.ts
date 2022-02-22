@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { ListBaseComponent } from 'src/app/shared/components/base/list-base.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BaseListComponent } from 'src/app/shared/components/base/base-list.component';
 import { Sistema } from './../../../../../../shared/models/sistema.model';
 import { SistemaService } from './../../../../../../shared/services/sistemas.service';
 import { CommonListComponent } from './../../../../../../shared/template/common-list/common-list.component';
@@ -11,15 +11,16 @@ import { SistemaConstant } from './../../sistema.constant';
   templateUrl: './sistema-list.component.html',
   styleUrls: ['./sistema-list.component.scss']
 })
-export class SistemaListComponent extends ListBaseComponent<Sistema, SistemaService> implements AfterViewInit, OnDestroy {
+export class SistemaListComponent extends BaseListComponent<Sistema, SistemaService> implements AfterViewInit, OnDestroy {
 
   @ViewChild('commonList') commonList: CommonListComponent;
 
   constructor(
-    protected sistemaService: SistemaService,
     protected router: Router,
+    protected activatedRoute: ActivatedRoute,
+    protected sistemaService: SistemaService,
   ) {
-    super(router, sistemaService, SistemaConstant.LIST_PAGE_CONFIG, SistemaConstant.COLS_TABLE_LIST);
+    super(router, activatedRoute, sistemaService, new SistemaConstant());
   }
 
   ngAfterViewInit(): void {
@@ -31,5 +32,9 @@ export class SistemaListComponent extends ListBaseComponent<Sistema, SistemaServ
 
   protected getCommonList(): CommonListComponent {
     return this.commonList;
+  }
+
+  public goToGerenciar(entity: Sistema): void {
+    this.router.navigate([this.pageConfig.baseUrl, entity.id, 'manager']);
   }
 }

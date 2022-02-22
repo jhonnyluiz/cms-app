@@ -24,7 +24,6 @@ const routes: Routes = [
             canActivate: [AuthGuard],
             children: [
               { path: 'sistemas', loadChildren: () => import('./modules/parametrizacoes/menu/sistema/sistema.module').then(m => m.SistemaModule), canActivate: [AuthGuard]},
-              { path: 'itens-menu', loadChildren: () => import('./modules/parametrizacoes/menu/itens-menu/itens-menu.module').then(m => m.ItensMenuModule), canActivate: [AuthGuard]},
             ]
           },
           { path: 'operacoes', loadChildren: () => import('./modules/parametrizacoes/operacao/operacao.module').then(m => m.OperacaoModule), canActivate: [AuthGuard],},

@@ -1,1 +1,7 @@
 @import 'primeng/resources/themes/saga-blue/theme.css';
+
+:root {
+  --bg-body: #ddd;
+  --color-body: #000;
+  --bg-dados-sistema: #eee;
+}

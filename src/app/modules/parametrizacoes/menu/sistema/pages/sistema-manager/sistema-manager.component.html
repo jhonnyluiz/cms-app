@@ -1,0 +1,16 @@
+<common-page #commonPage [config]="pageConfig" [btnActions]="actions">
+  <div body>
+    <div class="col-12 dados-sistema">
+      <p>Nome: <span>{{entity.nome}}</span></p>
+      <p>Código: <span>{{entity.codigo}}</span></p>
+      <p>Situação: <span class="customer-badge status-{{entity.typeSituacao?.toLowerCase()}}">{{entity.typeSituacao}}</span></p>
+    </div>
+    <div class="col-12">
+      <item-menu-form-dialog #itemMenuDialog></item-menu-form-dialog>
+      <button type="button" (click)="novoItem()" icon="pi pi-plus-circle" label="Novo Item" pButton></button>
+    </div>
+    <div class="col-12">
+      <p-tree [value]="itensMenuTree" [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self" emptyMessage="Nenhum item adicionado ao sistema."></p-tree>
+    </div>
+  </div>
+</common-page>

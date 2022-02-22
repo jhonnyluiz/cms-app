@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient, private authStorageService: AuthStorageService) { }
 
   login(usuarioLoginDTO: UsuarioLoginDTO): Observable<JwtTokenDTO> {
-    return this.http.post<JwtTokenDTO>(environment.serverUrl+'/auth/login', usuarioLoginDTO);
+    return this.http.post<JwtTokenDTO>(environment.serverUrl+'auth/login', usuarioLoginDTO);
   }
 
   logout() {

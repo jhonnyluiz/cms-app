@@ -45,6 +45,16 @@
                 "bundleName": "saga-green",
                 "inject": false
               },
+              {
+                "input": "src/arya-green.css",
+                "bundleName": "arya-green",
+                "inject": false
+              },
+              {
+                "input": "src/lara-dark-blue.css",
+                "bundleName": "lara-dark-blue",
+                "inject": false
+              },
               "src/styles.scss"
             ],
             "scripts": []

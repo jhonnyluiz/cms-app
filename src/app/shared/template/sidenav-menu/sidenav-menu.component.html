@@ -1,5 +1,5 @@
 <div class="grid">
-  <div class="col-12 bg-blue-100 p-0 header-menu">
+  <div class="col-12 p-0 header-menu">
     <p-menubar [model]="sistema.itensMenu" styleClass="m-0">
       <ng-template pTemplate="start">
           <img src="assets/images/csm_logo.png" height="40" class="mr-2 pointer" [routerLink]="['/home']">
@@ -11,8 +11,11 @@
       </ng-template>
     </p-menubar>
   </div>
-  <div class="col-12 p-0 bg-bluegray-100 body-template">
+  <div class="col-12 p-0 body-template">
     <router-outlet></router-outlet>
+  </div>
+  <div class="col-12 p-0 m-0 footer flex align-content-center justify-content-center align-items-center">
+    © Copyright 2022 | Created by <a href="">JLC SYSTEMS</a>
   </div>
 </div>
 

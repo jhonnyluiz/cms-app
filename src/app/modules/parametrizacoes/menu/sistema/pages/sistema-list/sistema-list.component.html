@@ -2,6 +2,7 @@
   <ng-template let-entity>
     <td>{{entity.codigo}}</td>
     <td>{{entity.nome}}</td>
-    <td class="text-center">{{entity.typeSituacao}}</td>
+    <td class="text-center"><span [class]="'customer-badge status-' + entity.typeSituacao?.toLowerCase()">{{entity.typeSituacao}}</span></td>
+    <td class="text-center"><button pButton pRipple type="button" icon="pi pi-cog" pTooltip="Gerenciar sistema" tooltipPosition="top" class="p-button-sm p-button-secondary p-button-rounded p-button-outlined" (click)="goToGerenciar(entity)" [disabled]="entity.typeSituacao === 'INATIVO'"></button></td>
   </ng-template>
 </common-list>

@@ -14,11 +14,15 @@ export class SistemaService extends BaseService<Sistema> {
   }
 
   public getPathModule(): string {
-    return '/sistemas';
+    return 'sistemas/';
   }
 
   public findByCodSistema(codSistema: string): Observable<Sistema> {
-    return this.httpClient.get<Sistema>(this.baseUrl + '/byCodigo/' + codSistema, {headers: this.headers});
+    return this.httpClient.get<Sistema>(this.baseUrl + 'byCodigo/' + codSistema, {headers: this.headers});
+  }
+
+  public existsSistemaByCodigo(codSistema: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.baseUrl + 'exists/' + codSistema, {headers: this.headers});
   }
 
 }

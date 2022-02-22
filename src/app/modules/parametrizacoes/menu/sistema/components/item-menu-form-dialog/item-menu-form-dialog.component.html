@@ -1,0 +1,47 @@
+<p-dialog [header]="title" [(visible)]="display" [style]="{minWidth: '50vw'}" [closeIcon]="false" [transitionOptions]="">
+  <form [formGroup]="form">
+    <div class="grid flex">
+      <div class="col-12 grid flex">
+        <div class="col-12 lg:col-6">
+          <div class="field">
+            <label for="label" class="block">Label *</label>
+            <input id="label" type="text" formControlName="label" class="w-100 p-inputtext-sm" pInputText/>
+            <small id="label-help" class="p-error block" *ngIf="fieldMessageRequired('label')">Label é obrigatório.</small>
+          </div>
+        </div>
+        <div class="col-12 lg:col-6">
+          <div class="field">
+            <label for="icon" class="block">Icone *</label>
+            <p-autoComplete formControlName="icon" [suggestions]="filteredIcons" (completeMethod)="filterIcon($event)" field="icon" [dropdown]="true" styleClass="p-inputtext-sm w-100">
+              <ng-template let-icon pTemplate="icon" class="w-100">
+                  <i class="{{icon.value}}"></i> <span class="ml-2">{{icon.description}}</span>
+              </ng-template>
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid flex">
+        <div class="col-12 lg:col-6">
+          <div class="field">
+            <label for="url" class="block">URL *</label>
+            <input id="url" type="text" formControlName="url" class="w-100 p-inputtext-sm" pInputText/>
+          </div>
+        </div>
+        <div class="col-12 lg:col-6">
+          <div class="field">
+            <label for="styleClass" class="block">Style Class *</label>
+            <input id="styleClass" type="text" formControlName="styleClass" class="w-100 p-inputtext-sm" pInputText/>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 grid flex">
+        <div class="col-12 lg:col-6">
+          <div class="field">
+            <label for="itemPai" class="block">Item Menu Pai *</label>
+            <input id="itemPai" type="text" formControlName="itemPai" class="w-100 p-inputtext-sm" pInputText/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-dialog>

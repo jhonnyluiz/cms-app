@@ -1,10 +1,19 @@
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CommonPageConfig } from '../../models/common-page-config.model';
+import { CrudEnum } from '../../types/crud.enum';
+import { BaseConstant } from './base.constant';
 export abstract class BaseComponent {
 
+  private _operacao: CrudEnum;
+  private _pageConfig: CommonPageConfig;
   private _loading: boolean = true;
   private _subscriptionsList: Subscription[] = [];
 
-  constructor() { }
+  constructor(protected activatedRoute: ActivatedRoute, constants: BaseConstant) {
+    this._operacao = this.activatedRoute.snapshot.data.operacao;
+    this._pageConfig = constants.getPageConfig(this.operacao.codigo);
+  }
 
 
   /**
@@ -38,6 +47,25 @@ export abstract class BaseComponent {
    * @returns void
    */
   protected loaded = () => this._loading = false;
+
+
+  /**
+   * #######################
+   * ## Getters e Setters ##
+   * #######################
+   */
+
+  /**
+   * ## NÃO SOBRESCREVER ##
+   * Retorna a operação realizada na página.
+   */
+  get operacao(): CrudEnum { return this._operacao; }
+
+  /**
+    * ## NÃO SOBRESCREVER ##
+    * Retorna os dados de configuração da página;
+    */
+  public get pageConfig(): CommonPageConfig { return this._pageConfig }
 
   /**
    * ## NÃO SOBRESCREVER ##

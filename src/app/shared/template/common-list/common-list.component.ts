@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core';
-import { ListBaseComponent } from '../../components/base/list-base.component';
+import { BaseListComponent } from '../../components/base/base-list.component';
 import { PaginadorCustomComponent } from '../../components/paginador-custom/paginador-custom.component';
 import { CommonPageComponent } from '../common-page/common-page.component';
 
@@ -15,7 +15,7 @@ export class CommonListComponent implements AfterViewInit {
   @ViewChild("paginador") _paginador: PaginadorCustomComponent;
   @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
 
-  @Input() component: ListBaseComponent<any, any>;
+  @Input() component: BaseListComponent<any, any>;
 
   constructor() { }
 
@@ -28,6 +28,6 @@ export class CommonListComponent implements AfterViewInit {
   }
 
   public get commonPage() {
-    return this.commonPage;
+    return this._commonPage;
   }
 }

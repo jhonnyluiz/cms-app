@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://localhost:8080',
-  cosSistema: 'CSM'
+  serverUrl: 'http://localhost:8080/',
+  codSistema: 'CSM'
 };
 
 /*

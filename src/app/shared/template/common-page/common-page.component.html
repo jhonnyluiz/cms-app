@@ -11,17 +11,23 @@
           label="{{btn.label}}"
           icon="{{btn.icon}}"
           class="{{btn.classStyle}} ml-2"
+          [pTooltip]="btn.tooltip"
+          tooltipPosition="left"
           (click)="btn.action()"
           [disabled]="btn.disabled"></button>
       </div>
     </div>
   </div>
   <p-card>
-    <div class="grid flex body-list">
-      <div class="col-12">
+    <div class="grid flex content-card">
+      <div class="col-12 body-list body-list-sm">
         <ng-content select="[body]"></ng-content>
+      </div>
+      <div class="col-12">
+        <ng-content select="[footer]"></ng-content>
       </div>
     </div>
   </p-card>
+  <p-confirmDialog [style]="{minWidth: '30vw', maxWidth: '70vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 </div>
 

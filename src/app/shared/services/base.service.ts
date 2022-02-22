@@ -16,7 +16,7 @@ export abstract class BaseService<T> {
     return this.http.get<T[]>(this.baseUrl, { headers: this.headers });
   }
 
-  public getPagedList(page: number = 1, size: number = 10): Observable<Page<T>> {
+  public getPagedList(page: number = 0, size: number = 10): Observable<Page<T>> {
     return this.http.get<Page<T>>(this.baseUrl, { headers: this.headers, params: this.getPagedListParams(page, size)});
   }
 
@@ -37,7 +37,7 @@ export abstract class BaseService<T> {
   }
 
   public getPagedListParams(page: number, size: number) {
-    return {'_page': page, '_limit': size}
+    return {'page': page , 'size': size}
   }
 
   public get baseUrl(): string {

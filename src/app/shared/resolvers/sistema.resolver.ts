@@ -11,6 +11,6 @@ export class SistemaResolver implements Resolve<Sistema> {
   constructor(private sistemaService: SistemaService) {}
 
   resolve(): Observable<Sistema> {
-    return this.sistemaService.findByCodSistema(environment.cosSistema);
+    return this.sistemaService.findByCodSistema(environment.codSistema);
   }
 }

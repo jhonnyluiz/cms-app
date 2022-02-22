@@ -1,22 +1,24 @@
 <common-page #commonPage [config]="component.pageConfig" [btnActions]="component.actions">
   <div body>
     <div class="table-list" *ngIf="!component.isLoading; else noDatasource">
-      <p-table [value]="component.datasource.content" dataKey="id" responsiveLayout="scroll" styleClass="p-datatable-striped"
+      <p-table [value]="component.datasource.content" dataKey="id" responsiveLayout="scroll" styleClass="p-datatable-striped p-datatable-sm"
       [(selection)]="component.listSelected" [rowSelectable]="component.isRowSelectable" selectionMode="multiple"
       (onRowSelect)="component.enableExcluir($event)" (onRowUnselect)="component.enableExcluir($event)" (onHeaderCheckboxToggle)="component.enableExcluir($event)"
           currentPageReportTemplate="" [rowsPerPageOptions]="[10,25,50]">
           <ng-template pTemplate="header">
-              <tr><th *ngFor="let c of component.columns" class="{{c.styleClass}}">{{c.label}} <p-tableHeaderCheckbox *ngIf="c.label === ' '"></p-tableHeaderCheckbox></th></tr>
+              <tr><th *ngFor="let c of component.columns" class="{{c.styleClass}}">{{c.label}} <p-tableHeaderCheckbox pTooltip="Selecionar todos itens para exclusão" tooltipPosition="top" *ngIf="c.label === ' '"></p-tableHeaderCheckbox></th></tr>
           </ng-template>
           <ng-template pTemplate="body" let-entity>
             <tr>
-              <td class="text-center"><p-tableCheckbox [value]="entity"></p-tableCheckbox></td>
+              <td class="text-center"><p-tableCheckbox [value]="entity" pTooltip="Selecionar item para exclusão" tooltipPosition="top"></p-tableCheckbox></td>
               <ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{$implicit: entity}"></ng-template>
-              <td class="text-center"><button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-sm p-button-rounded p-button-outlined" (click)="component.goToEditar(entity)"></button></td>
+              <td class="text-center"><button pButton pRipple type="button" icon="pi pi-pencil" pTooltip="Editar item" tooltipPosition="top" class="p-button-sm p-button-rounded p-button-outlined" (click)="component.goToEditar(entity)"></button></td>
             </tr>
           </ng-template>
       </p-table>
     </div>
+  </div>
+  <div footer>
     <paginador-custom #paginador (change)="component.loadDatasource()" [showPaginator]="component.datasource"></paginador-custom>
   </div>
   <ng-template #noDatasource>

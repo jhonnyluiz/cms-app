@@ -6,6 +6,8 @@
       [totalRecords]="paginator.totalElements"
       (onPageChange)="changePaginator($event)"
       [showFirstLastIcon]="false"
+      [rowsPerPageOptions]="[10,20,30]"
+      (onPageChange)="changePaginator($event)"
     ></p-paginator>
   </div>
 </div>
