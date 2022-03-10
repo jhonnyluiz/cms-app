@@ -1,15 +1,15 @@
-import { CrudEnum } from '../../types/crud.enum';
-import { ActionButton } from '../../models/action-button.model';
 import { ActivatedRoute, Router } from "@angular/router";
+import { MessageService } from 'primeng/api';
+import { ActionButton } from '../../models/action-button.model';
 import { BaseModel } from "../../models/base.model";
 import { ColumnsTable } from "../../models/columns-table.model";
-import { CommonPageConfig } from "../../models/common-page-config.model";
 import { Page } from "../../models/page.model";
 import { BaseService } from "../../services/base.service";
+import { CommonListComponent } from '../../template/common-list/common-list.component';
 import { CommonPageComponent } from "../../template/common-page/common-page.component";
+import { CrudEnum } from "../../types/crud.enum";
 import { PaginadorCustomComponent } from "../paginador-custom/paginador-custom.component";
 import { BaseComponent } from "./base.component";
-import { CommonListComponent } from '../../template/common-list/common-list.component';
 import { BaseConstant } from './base.constant';
 
 export abstract class BaseListComponent<T extends BaseModel<T>, S extends BaseService<T>> extends BaseComponent {
@@ -20,7 +20,12 @@ export abstract class BaseListComponent<T extends BaseModel<T>, S extends BaseSe
   private _skeletonTable = { columns: this._columns, data: [{}] }
   private _actions: ActionButton[] = [ActionButton.btnNovo(() => this.goToNovo()), ActionButton.btnExcluir(() => this.execExcluir())];
 
-  constructor(protected router: Router, protected activatedRoute: ActivatedRoute, protected service: S, constants: BaseConstant) {
+  constructor(
+    protected router: Router,
+    protected activatedRoute: ActivatedRoute,
+    protected messageService: MessageService,
+    protected service: S,
+    constants: BaseConstant) {
     super(activatedRoute, constants);
     this._columns = constants.colunsTableList;
   }
@@ -119,7 +124,7 @@ export abstract class BaseListComponent<T extends BaseModel<T>, S extends BaseSe
    * Método responsável por realizar a execução de exclusão dos itens selecionados.
    */
   public execExcluir() {
-    this.sub(this.service.deleteAll(this._listSelected.map(e => e.id)).subscribe(this.successExcluir));
+    this.sub(this.service.deleteAll(this._listSelected.map(e => e.id)).subscribe(() => this.successExcluir()));
   }
 
   /**
@@ -127,8 +132,10 @@ export abstract class BaseListComponent<T extends BaseModel<T>, S extends BaseSe
    *
    * @param response
    */
-  private successExcluir(response: any) {
+  private successExcluir() {
+    this.messageService.add({ key: 'defaultError', severity: 'success', summary: 'Sucesso', detail: `${CrudEnum.DELETE} realizada com sucesso.` });
     this.loaded();
+    this.loadDatasource();
   }
 
   // #######################

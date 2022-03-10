@@ -41,7 +41,11 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
     this.setDataFormEdit();
   }
 
-  public goToList():void {
+
+  abstract initForm(): void;
+  public limparForm(): void { };
+
+  public goToSuccess(): void {
     this.router.navigate([this.pageConfig.baseUrl, 'list']);
   }
 
@@ -73,7 +77,7 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
     }
   }
 
-  protected setDataFormEditExtra(): void {}
+  protected setDataFormEditExtra(): void { }
 
   /**
    * Execução de validação do formulário de acordo com os campos obrigatórios.
@@ -101,7 +105,7 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
    * Método adicional para exibição de campos não validos no formulário.
    */
   protected showErrorsValidation() {
-    this.messageService.add({key: 'defaultError', severity:'warn', summary: 'Atenção', detail: `É necessário preencher todos os campos obrigatórios.`});
+    this.messageService.add({ key: 'defaultError', severity: 'warn', summary: 'Atenção', detail: `É necessário preencher todos os campos obrigatórios.` });
   }
 
   /**
@@ -115,7 +119,7 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
           this._entity = res;
           this.loaded();
           this.showMessageSuccess(res);
-          this.goToList();
+          this.goToSuccess();
         },
         err => {
           console.log(err);
@@ -137,10 +141,11 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
           this._entity = res;
           this.loaded();
           this.showMessageSuccess(res);
-          this.goToList();
+          this.goToSuccess();
         },
         err => {
-          console.error(err);
+          console.error(err.message);
+          this.showMessageError(err);
           this.loaded()
         })
     );
@@ -177,7 +182,17 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
    * @param entity
    */
   protected showMessageSuccess(entity: T) {
-    this.messageService.add({key: 'defaultError', severity:'success', summary: 'Sucesso', detail: `${this.operacao.descricao} realizada com sucesso.`});
+    this.messageService.add({ key: 'defaultError', severity: 'success', summary: 'Sucesso', detail: `${this.operacao.descricao} realizada com sucesso.` });
+  }
+
+  /**
+   * Método responsável por exibir a mensagem de sucesso ao criar/editar um
+   * registro.
+   *
+   * @param entity
+   */
+  protected showMessageError(error) {
+    this.messageService.add({ key: 'defaultError', severity: 'error', summary: 'OPS!! Ocorreu um erro na ${this.operacao.descricao}.', detail: `${error.message}` });
   }
 
   /**
@@ -198,7 +213,7 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
   /**
    * Redirecionamento para a rota de listagem.
    */
-  private redirectCancelar = () => {
+  public redirectCancelar(): void {
     this.router.navigate([this.pageConfig.baseUrl, 'list'])
   }
 
@@ -214,7 +229,7 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
       icon: 'pi pi-exclamation-triangle',
-      accept: () => { this.goToList() },
+      accept: () => { this.goToSuccess() },
       reject: (type) => { }
     });
   }
@@ -241,15 +256,8 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
 
   public fieldMessageRequired(field, typeError: string = 'required'): boolean {
     const erros = this.form.get(field).errors;
-    console.log(field + JSON.stringify(erros))
     return this.form.get(field).invalid && this.form.get(field).dirty && ObjUtil.isNotEmpty(erros[typeError]);
   }
-
-  // public fieldMessageRequired(field): boolean {
-  //   return this.form.get(field).invalid && this.form.get(field).dirty && this.form.get(field).errors;
-  // }
-
-  abstract initForm(): void;
 
   /**
    * Método responsável por setar a informação de que houve alteração na tela. Usado para mostar o modal de cancelar.
@@ -311,8 +319,8 @@ export abstract class BaseFormComponent<T extends BaseModel<T>, S extends BaseSe
    * ## Getters e Setters ##
    * #######################
    */
-
   get entity(): T { return this._entity; }
+  protected setEntity(e: T) { this._entity = e; }
 
   get actions(): ActionButton[] { return this._actions; }
 

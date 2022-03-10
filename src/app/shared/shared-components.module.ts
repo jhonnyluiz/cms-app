@@ -15,17 +15,19 @@ import { CommonPageComponent } from './template/common-page/common-page.componen
 import { SidenavMenuComponent } from './template/sidenav-menu/sidenav-menu.component';
 import { CommonListComponent } from './template/common-list/common-list.component';
 import { ConfirmationService, TreeDragDropService } from 'primeng/api';
+import { BtnActionsComponent } from './components/btn-actions/btn-actions.component';
 
 
 
 @NgModule({
   declarations: [
     BlankCenterComponent,
-    SidenavMenuComponent,
-    CommonPageComponent,
+    BtnActionsComponent,
     CommonListComponent,
+    CommonPageComponent,
     NotFoundComponent,
     PaginadorCustomComponent,
+    SidenavMenuComponent,
     TdTypeSituacaoComponent,
   ],
   imports: [
@@ -38,10 +40,11 @@ import { ConfirmationService, TreeDragDropService } from 'primeng/api';
   ],
   exports: [
     BlankCenterComponent,
-    CommonPageComponent,
+    BtnActionsComponent,
     CommonListComponent,
-    SidenavMenuComponent,
+    CommonPageComponent,
     NotFoundComponent,
+    SidenavMenuComponent,
 
     FormsModule,
     HttpClientModule,

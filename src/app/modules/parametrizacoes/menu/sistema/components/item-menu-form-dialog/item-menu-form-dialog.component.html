@@ -1,5 +1,17 @@
-<p-dialog [header]="title" [(visible)]="display" [style]="{minWidth: '50vw'}" [closeIcon]="false" [transitionOptions]="">
+<p-dialog [header]="title" [(visible)]="display" [style]="{width: '70vw'}" closable="false" resizable="true" modal="true">
   <form [formGroup]="form">
+    <div class="grid flex">
+      <div class="col-12">
+        <div class="field">
+          <label for="label" class="block">Exemplo de Visualização:</label>
+          <div class="col-12">
+            <span class="p-menubar">
+              <i class="{{form.get('icon').value?.value}}"></i> <span class="ml-2 pb-1">{{form.get('label').value}}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="grid flex">
       <div class="col-12 grid flex">
         <div class="col-12 lg:col-6">
@@ -11,8 +23,9 @@
         </div>
         <div class="col-12 lg:col-6">
           <div class="field">
-            <label for="icon" class="block">Icone *</label>
-            <p-autoComplete formControlName="icon" [suggestions]="filteredIcons" (completeMethod)="filterIcon($event)" field="icon" [dropdown]="true" styleClass="p-inputtext-sm w-100">
+            <label for="icon" class="block">Icon</label>
+            <p-autoComplete formControlName="icon" [suggestions]="filteredIcons" (completeMethod)="filterIcon($event)"
+              field="description" [dropdown]="true"  styleClass="w-100" inputStyleClass="p-inputtext-sm">
               <ng-template let-icon pTemplate="icon" class="w-100">
                   <i class="{{icon.value}}"></i> <span class="ml-2">{{icon.description}}</span>
               </ng-template>
@@ -23,25 +36,28 @@
       <div class="col-12 grid flex">
         <div class="col-12 lg:col-6">
           <div class="field">
-            <label for="url" class="block">URL *</label>
+            <label for="url" class="block">URL</label>
             <input id="url" type="text" formControlName="url" class="w-100 p-inputtext-sm" pInputText/>
           </div>
         </div>
         <div class="col-12 lg:col-6">
           <div class="field">
-            <label for="styleClass" class="block">Style Class *</label>
-            <input id="styleClass" type="text" formControlName="styleClass" class="w-100 p-inputtext-sm" pInputText/>
+            <label for="itemPai" class="block">Item Menu Pai {{this.form.get('itemPai').value | json}}</label>
+            <p-autoComplete formControlName="itemPai" c
+              [suggestions]="filteredItensPai" (completeMethod)="filterItensPai($event)" field="descricao" [dropdown]="true" styleClass="w-100" inputStyleClass="p-inputtext-sm">
+            </p-autoComplete>
           </div>
         </div>
       </div>
       <div class="col-12 grid flex">
         <div class="col-12 lg:col-6">
           <div class="field">
-            <label for="itemPai" class="block">Item Menu Pai *</label>
-            <input id="itemPai" type="text" formControlName="itemPai" class="w-100 p-inputtext-sm" pInputText/>
+            <label for="styleClass" class="block">Style Class</label>
+            <input id="styleClass" type="text" formControlName="styleClass" class="w-100 p-inputtext-sm" pInputText/>
           </div>
         </div>
       </div>
     </div>
   </form>
+  <btn-actions [buttons]="actions" justify="end"></btn-actions>
 </p-dialog>

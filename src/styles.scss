@@ -90,6 +90,11 @@ body {
   border-radius: 20px;
 }
 
+.p-button.p-button-icon-only {
+  width: 2.357rem !important;
+  padding: 0 !important;
+}
+
 .text-center { text-align: center !important; }
 .text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
@@ -192,3 +197,4 @@ body {
 .w-98 { width: 98% !important; }
 .w-99 { width: 99% !important; }
 .w-100 { width: 100% !important; }
+.z-100 {z-index: 99999;}

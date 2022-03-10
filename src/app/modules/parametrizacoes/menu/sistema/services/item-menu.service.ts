@@ -1,3 +1,5 @@
+import { SelectDTO } from './../../../../../shared/dto/select.dto';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ItemMenu } from './../../../../../shared/models/item-menu.model';
 import { Injectable } from '@angular/core';
@@ -11,6 +13,11 @@ export class ItemMenuService extends BaseService<ItemMenu>{
   }
 
   public getPathModule(): string {
-    return 'item-menu/';
+    return 'itens-menu/';
+  }
+
+
+  public getSelectList(sistemaId: number, filterText: string = ''): Observable<SelectDTO[]> {
+    return this.http.get<SelectDTO[]>(this.baseUrl + 'list-select', { headers: this.headers, params: { filterText, sistemaId } });
   }
 }

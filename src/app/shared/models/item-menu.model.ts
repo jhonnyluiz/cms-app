@@ -1,3 +1,4 @@
+import { ObjUtil } from './../util/obj.util';
 import { Sistema } from 'src/app/shared/models/sistema.model';
 import { MenuItem } from 'primeng/api';
 import { BaseModel } from './base.model';
@@ -18,6 +19,8 @@ export class ItemMenu extends BaseModel<ItemMenu> {
     public items: ItemMenu[] = null,
     public order: number = null,
     public itemPai: number = null,
+    public sistemaId: number = null,
+    public itemPaiId: number = null,
   ) {
     super(id);
   }

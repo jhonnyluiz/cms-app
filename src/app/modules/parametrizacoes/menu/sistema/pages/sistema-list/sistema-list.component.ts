@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from 'src/app/shared/components/base/base-list.component';
@@ -18,9 +19,10 @@ export class SistemaListComponent extends BaseListComponent<Sistema, SistemaServ
   constructor(
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
+    protected messageService: MessageService,
     protected sistemaService: SistemaService,
   ) {
-    super(router, activatedRoute, sistemaService, new SistemaConstant());
+    super(router, activatedRoute, messageService, sistemaService, new SistemaConstant());
   }
 
   ngAfterViewInit(): void {

@@ -43,11 +43,10 @@ export abstract class BaseComponent {
 
   /**
    * ## NÃO SOBRESCREVER ##
-   * Parar o loaind de um component;
+   * Parar o loading de um component;
    * @returns void
    */
   protected loaded = () => this._loading = false;
-
 
   /**
    * #######################
@@ -60,6 +59,7 @@ export abstract class BaseComponent {
    * Retorna a operação realizada na página.
    */
   get operacao(): CrudEnum { return this._operacao; }
+  protected setOperacao(o: CrudEnum) { this._operacao = o; }
 
   /**
     * ## NÃO SOBRESCREVER ##

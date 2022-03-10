@@ -248,4 +248,8 @@ export class IconType {
   public equals(icon: IconType): boolean {
     return this.value === icon.value;
   }
+
+  public static getByCodigo(codValue: string) {
+    return IconType.values().find(icon => icon.value === codValue);
+  }
 }
